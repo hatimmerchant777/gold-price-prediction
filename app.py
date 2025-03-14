@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from models.model import GoldPricePredictor
 import pandas as pd
+import os
 
 app = Flask(__name__)
 predictor = GoldPricePredictor()
@@ -40,4 +41,5 @@ def developer():
     return render_template('developer.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))  # Use Render-assigned port
+    app.run(host="0.0.0.0", port=port, debug=True)
